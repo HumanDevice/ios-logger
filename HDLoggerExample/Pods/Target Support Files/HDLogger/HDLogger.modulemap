@@ -1,0 +1,6 @@
+framework module HDLogger {
+  umbrella header "HDLogger-umbrella.h"
+
+  export *
+  module * { export * }
+}
