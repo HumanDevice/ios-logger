@@ -8,9 +8,17 @@
 
 import UIKit
 
+/**
+Convenient class that handles colors for output in Xcode. Use with XcodeColors module.
+Remember to turn off colors after usage using new instance or using **clearColor** constant
+ - author: Mikołaj Styś
+ - date: 15/07/16
+ */
 public struct ConsoleColor: CustomStringConvertible, CustomDebugStringConvertible {
   
+  /// Start character states that colors should be changed
   public static let escape = "\u{001b}["
+  
   public static let clearForegroundColor = "\(escape)fg;"
   public static let clearBackgroundColor = "\(escape)bg;"
   public static let clearColor = "\(escape);"
@@ -18,14 +26,19 @@ public struct ConsoleColor: CustomStringConvertible, CustomDebugStringConvertibl
   public var foregroundColor: (Int, Int, Int)? = nil
   public var backgroundColor: (Int, Int, Int)? = nil
   
+  /// conveneient way to change output color
   public var description: String {
     return format()
   }
   
+  /// conveneient way to change output color
   public var debugDescription: String {
     return format()
   }
   
+  /*
+   * Changes output color. Should be used before colored text.
+   */
   public func format() -> String {
     guard foregroundColor != nil || backgroundColor != nil else {
       // neither set, return reset value

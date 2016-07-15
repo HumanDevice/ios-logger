@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ Struct that hold data that enables HDLogger configurability.
+ */
 public struct LogConfig {
   
   var timeFormat: String = "HH:mm:ss.SSS"
@@ -32,6 +35,9 @@ public struct LogConfig {
   
 }
 
+/**
+ Data related to particular log message that will be printed
+ */
 public struct LogData {
   var message: Any
   var file: String
@@ -42,6 +48,9 @@ public struct LogData {
   var time: NSDate
 }
 
+/**
+ Represents available log levels. Numbers states for level priority (smaller number, smaller priority)
+ */
 public enum LogLevel: Int {
   
   case Verbose = 1

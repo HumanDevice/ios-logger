@@ -8,11 +8,16 @@
 
 import Foundation
 
+/**
+ Main class responsible for logging.
+ */
 public class Log {
   
   private static let sharedInstance = Log()
   
+  /// Config used for log formatting
   var config: LogConfig = LogConfig()
+  
   private var dateFormatter: NSDateFormatter = NSDateFormatter()
   
   private init() {
@@ -26,6 +31,10 @@ public class Log {
     }
   }
   
+  /**
+   Class used by specified instance of logger to create string message that will be printed out
+   - parameter logData: data that log will be created from
+  */
   func createLog(logData: LogData) {
     guard config.enableLogging && logData.logLevel.rawValue >= config.logLevel.rawValue else { return }
     
@@ -64,8 +73,9 @@ public class Log {
     LogQueue.post(message)
   }
   
-
-  
+  /**
+   Function creates **LogData** object from received data and notifies all logger instances
+  */
   public class func log(level: LogLevel, message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
     sharedInstance.createLog(LogData(message: message, file: fileName, logLevel: level, thread: determineThread(), lineNumber: lineNumber, function: functionName, time: NSDate()))
   }
