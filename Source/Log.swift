@@ -13,7 +13,7 @@ import Foundation
  */
 public class Log {
   
-  private static let sharedInstance = Log()
+  static let sharedInstance = Log()
   
   /// Config used for log formatting
   var config: LogConfig = LogConfig()
