@@ -22,13 +22,6 @@ public class Log {
   
   private init() {
     dateFormatter.locale = NSLocale.currentLocale()
-    checkXcodeColors()
-  }
-  
-  private func checkXcodeColors() {
-    if let xcodeColors = NSProcessInfo.processInfo().environment["XcodeColors"] where config.enableLogging {
-      config.showColors = xcodeColors == "YES"
-    }
   }
   
   /**
@@ -39,9 +32,6 @@ public class Log {
     guard config.enableLogging && logData.logLevel.rawValue >= config.logLevel.rawValue else { return }
     
     var message = ""
-    if config.showColors {
-      message += "\(config.logLevelColors[logData.logLevel]!)"
-    }
     if config.showTime {
       dateFormatter.dateFormat = "HH:mm:ss.SSS"
       message += "\(dateFormatter.stringFromDate(NSDate())) "
@@ -67,9 +57,6 @@ public class Log {
       message += "(\(logData.lineNumber))"
     }
     message += ":\(logData.message)"
-    if config.showColors {
-      message += ConsoleColor.clearColor
-    }
     LogQueue.post(message)
   }
   

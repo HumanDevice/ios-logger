@@ -21,16 +21,9 @@ public struct LogConfig {
   var showFile: Bool = true
   var showFunction: Bool = false
   var showTime: Bool = true
-  var showColors: Bool = true
   var showLevel: Bool = true
-  var logLevelColors: [LogLevel: ConsoleColor] = [:]
   
   init() {
-    logLevelColors[.Verbose] = ConsoleColor.lightGray
-    logLevelColors[.Debug] = ConsoleColor.darkGray
-    logLevelColors[.Info] = ConsoleColor()
-    logLevelColors[.Warning] = ConsoleColor.blue
-    logLevelColors[.Error] = ConsoleColor.red
   }
   
 }

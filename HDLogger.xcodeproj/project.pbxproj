@@ -10,7 +10,6 @@
 		3F4BA444A444448DFE25A548 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC41A54D8DC6A1C73DA4E767 /* Pods_Tests.framework */; };
 		A04DFD67C1A7C5CB76B29E24 /* Pods_HDLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94D6085BBE350B10406D5049 /* Pods_HDLogger.framework */; };
 		D011FF3A1D37EF6600B64497 /* HDLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D011FF391D37EF6600B64497 /* HDLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D011FF471D37EFF700B64497 /* ConsoleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D011FF431D37EFF700B64497 /* ConsoleColor.swift */; };
 		D011FF481D37EFF700B64497 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = D011FF441D37EFF700B64497 /* Log.swift */; };
 		D011FF491D37EFF700B64497 /* LogConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D011FF451D37EFF700B64497 /* LogConfig.swift */; };
 		D011FF4A1D37EFF700B64497 /* LogQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D011FF461D37EFF700B64497 /* LogQueue.swift */; };
@@ -37,7 +36,6 @@
 		D011FF361D37EF6600B64497 /* HDLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HDLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D011FF391D37EF6600B64497 /* HDLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDLogger.h; sourceTree = "<group>"; };
 		D011FF3B1D37EF6600B64497 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D011FF431D37EFF700B64497 /* ConsoleColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleColor.swift; sourceTree = "<group>"; };
 		D011FF441D37EFF700B64497 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		D011FF451D37EFF700B64497 /* LogConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogConfig.swift; sourceTree = "<group>"; };
 		D011FF461D37EFF700B64497 /* LogQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueue.swift; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 		D011FF381D37EF6600B64497 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D011FF431D37EFF700B64497 /* ConsoleColor.swift */,
 				D011FF441D37EFF700B64497 /* Log.swift */,
 				D011FF451D37EFF700B64497 /* LogConfig.swift */,
 				D011FF461D37EFF700B64497 /* LogQueue.swift */,
@@ -197,9 +194,12 @@
 				TargetAttributes = {
 					D011FF351D37EF6600B64497 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					D011FF4E1D37F01300B64497 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = NJU7XBBFJ8;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -323,7 +323,6 @@
 			files = (
 				D011FF4A1D37EFF700B64497 /* LogQueue.swift in Sources */,
 				D011FF481D37EFF700B64497 /* Log.swift in Sources */,
-				D011FF471D37EFF700B64497 /* ConsoleColor.swift in Sources */,
 				D011FF491D37EFF700B64497 /* LogConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +453,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -472,6 +472,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.human-device.ios.HDLogger";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -479,10 +480,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 010A606B3782C7CFAEF05AD2 /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = NJU7XBBFJ8;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.human-device.ios.Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -490,10 +493,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7330C381DA8F32111064FD15 /* Pods-Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = NJU7XBBFJ8;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.human-device.ios.Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
