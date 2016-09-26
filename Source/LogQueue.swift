@@ -11,22 +11,22 @@ import Foundation
 /**
  Log Queue for properly log queueing in multithread enviroment
  */
-public class LogQueue {
+open class LogQueue {
   
-  public static let logQueueIdentifier = "com.human-device.ios.logger.queue"
-  private static let sharedInstance = LogQueue()
-  private let queue: dispatch_queue_t
+  open static let logQueueIdentifier = "com.human-device.ios.logger.queue"
+  fileprivate static let sharedInstance = LogQueue()
+  fileprivate let queue: DispatchQueue
   
-  private init() {
-    queue = dispatch_queue_create(LogQueue.logQueueIdentifier, nil)
+  fileprivate init() {
+    queue = DispatchQueue(label: LogQueue.logQueueIdentifier, attributes: [])
   }
   
   ///Posts created log message to queue
-  public static func post(message: String) {
+  open static func post(_ message: String) {
     let outputClosure = {
       print(message)
     }
-    dispatch_async(sharedInstance.queue, outputClosure)
+    sharedInstance.queue.async(execute: outputClosure)
   }
   
 }

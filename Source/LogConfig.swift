@@ -15,7 +15,7 @@ public struct LogConfig {
   
   var timeFormat: String = "HH:mm:ss.SSS"
   var enableLogging: Bool = true
-  var logLevel: LogLevel = .Verbose
+  var logLevel: LogLevel = .verbose
   var showThread: Bool = false
   var showLineNumber: Bool = true
   var showFile: Bool = true
@@ -38,7 +38,7 @@ public struct LogData {
   var thread: String
   var lineNumber: Int
   var function: String
-  var time: NSDate
+  var time: Date
 }
 
 /**
@@ -46,9 +46,9 @@ public struct LogData {
  */
 public enum LogLevel: Int {
   
-  case Verbose = 1
-  case Debug = 2
-  case Info = 3
-  case Warning = 4
-  case Error = 5
+  case verbose = 1
+  case debug = 2
+  case info = 3
+  case warning = 4
+  case error = 5
 }

@@ -11,30 +11,30 @@ import Foundation
 /**
  Main class responsible for logging.
  */
-public class Log {
+open class Log {
   
   static let sharedInstance = Log()
   
   /// Config used for log formatting
   var config: LogConfig = LogConfig()
   
-  private var dateFormatter: NSDateFormatter = NSDateFormatter()
+  fileprivate var dateFormatter: DateFormatter = DateFormatter()
   
-  private init() {
-    dateFormatter.locale = NSLocale.currentLocale()
+  fileprivate init() {
+    dateFormatter.locale = Locale.current
   }
   
   /**
    Class used by specified instance of logger to create string message that will be printed out
    - parameter logData: data that log will be created from
   */
-  func createLog(logData: LogData) {
+  func createLog(_ logData: LogData) {
     guard config.enableLogging && logData.logLevel.rawValue >= config.logLevel.rawValue else { return }
     
     var message = ""
     if config.showTime {
       dateFormatter.dateFormat = "HH:mm:ss.SSS"
-      message += "\(dateFormatter.stringFromDate(NSDate())) "
+      message += "\(dateFormatter.string(from: Date())) "
     }
     
     if config.showLevel {
@@ -44,14 +44,14 @@ public class Log {
     if config.showThread {
       message += "[\(logData.thread)]"
     }
-    if let lastBraceIndex = logData.file.rangeOfString(".", options:NSStringCompareOptions.BackwardsSearch)?.last
-      where config.showFile {
-      message += "\((logData.file.substringToIndex(lastBraceIndex) as NSString).lastPathComponent)"
+    if let lastBraceIndex = logData.file.range(of: ".", options:NSString.CompareOptions.backwards)?.last
+      , config.showFile {
+      message += "\((logData.file.substring(to: lastBraceIndex) as NSString).lastPathComponent)"
     }
     
-    if let lastBraceIndex = logData.function.rangeOfString("(", options:NSStringCompareOptions.BackwardsSearch)?.last
-      where config.showFunction {
-      message += ".\(logData.function.substringToIndex(lastBraceIndex))"
+    if let lastBraceIndex = logData.function.range(of: "(", options:NSString.CompareOptions.backwards)?.last
+      , config.showFunction {
+      message += ".\(logData.function.substring(to: lastBraceIndex))"
     }
     if config.showLineNumber {
       message += "(\(logData.lineNumber))"
@@ -63,44 +63,44 @@ public class Log {
   /**
    Function creates **LogData** object from received data and notifies all logger instances
   */
-  public class func log(level: LogLevel, message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
-    sharedInstance.createLog(LogData(message: message, file: fileName, logLevel: level, thread: determineThread(), lineNumber: lineNumber, function: functionName, time: NSDate()))
+  open class func log(_ level: LogLevel, message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    sharedInstance.createLog(LogData(message: message, file: fileName, logLevel: level, thread: determineThread(), lineNumber: lineNumber, function: functionName, time: Date()))
   }
   
-  private static func determineThread() -> String {
+  fileprivate static func determineThread() -> String {
     var thread = ""
-    if NSThread.isMainThread() {
+    if Thread.isMainThread {
       thread = "main"
     } else {
-      if let threadName = NSThread.currentThread().name where !threadName.isEmpty {
+      if let threadName = Thread.current.name , !threadName.isEmpty {
         thread = threadName
-      } else if let queueName = String(UTF8String: dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL)) where !queueName.isEmpty {
+      } else if let queueName = String(validatingUTF8: DISPATCH_CURRENT_QUEUE_LABEL.label) , !queueName.isEmpty {
         thread = queueName
       } else {
-        thread = String(format:"%p", NSThread.currentThread())
+        thread = String(format:"%p", Thread.current)
       }
     }
     return thread
   }
   
-  public class func verbose(message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
-    log(.Verbose, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+  open class func verbose(_ message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    log(.verbose, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  public class func debug(message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
-    log(.Debug, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+  open class func debug(_ message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    log(.debug, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  public class func info(message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
-    log(.Info, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+  open class func info(_ message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    log(.info, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  public class func warning(message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
-    log(.Warning, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+  open class func warning(_ message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    log(.warning, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
-  public class func error(message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
-    log(.Error, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+  open class func error(_ message: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    log(.error, message: message, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
   }
   
 }

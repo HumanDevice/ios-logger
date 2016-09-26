@@ -9,5 +9,5 @@ target 'HDLoggerExample' do
   use_frameworks!
 
   # Pods for HDLoggerExample
-  pod 'HDLogger', '~> 0.9.2'
+  pod 'HDLogger', '~> 0.9.3'
 end
